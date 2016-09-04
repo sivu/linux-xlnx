@@ -441,7 +441,7 @@ static int simplefb_probe(struct platform_device *pdev)
 	info->fbops = &simplefb_ops;
 	info->flags = FBINFO_DEFAULT | FBINFO_MISC_FIRMWARE;
 
-	dev_info(&pdev->dev,"mapping framebuffer at 0x%lx (0x%lx bytes)",info->fix.smem_start,info->fix.smem_len);
+	dev_info(&pdev->dev,"mapping framebuffer at 0x%lx (0x%x bytes)",info->fix.smem_start,info->fix.smem_len);
 	info->screen_base = ioremap_wc(info->fix.smem_start,
 				       info->fix.smem_len);
 	if (!info->screen_base) {
