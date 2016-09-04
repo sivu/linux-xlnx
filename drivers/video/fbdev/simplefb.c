@@ -431,7 +431,7 @@ static int simplefb_probe(struct platform_device *pdev)
 
 	info->apertures = alloc_apertures(1);
 	if (!info->apertures) {
-		dev_err(&pdev->dec,"aperture allocation failed");
+		dev_err(&pdev->dev,"aperture allocation failed");
 		ret = -ENOMEM;
 		goto error_fb_release;
 	}
