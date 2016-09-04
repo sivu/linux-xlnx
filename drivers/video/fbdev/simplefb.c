@@ -431,6 +431,7 @@ static int simplefb_probe(struct platform_device *pdev)
 
 	info->apertures = alloc_apertures(1);
 	if (!info->apertures) {
+		dev_err(&pdev->dec,"aperture allocation failed");
 		ret = -ENOMEM;
 		goto error_fb_release;
 	}
@@ -439,9 +440,12 @@ static int simplefb_probe(struct platform_device *pdev)
 
 	info->fbops = &simplefb_ops;
 	info->flags = FBINFO_DEFAULT | FBINFO_MISC_FIRMWARE;
+
+	dev_info(&pdev->dev,"mapping framebuffer at 0x%lx (0x%lx bytes)",info->fix.smem_start,info->fix.smem_len);
 	info->screen_base = ioremap_wc(info->fix.smem_start,
 				       info->fix.smem_len);
 	if (!info->screen_base) {
+		dev_error(&pdev->dev,"mapping of framebuffer failed");
 		ret = -ENOMEM;
 		goto error_fb_release;
 	}
