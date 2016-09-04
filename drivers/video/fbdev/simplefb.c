@@ -445,7 +445,7 @@ static int simplefb_probe(struct platform_device *pdev)
 	info->screen_base = ioremap_wc(info->fix.smem_start,
 				       info->fix.smem_len);
 	if (!info->screen_base) {
-		dev_error(&pdev->dev,"mapping of framebuffer failed");
+		dev_err(&pdev->dev,"mapping of framebuffer failed");
 		ret = -ENOMEM;
 		goto error_fb_release;
 	}
