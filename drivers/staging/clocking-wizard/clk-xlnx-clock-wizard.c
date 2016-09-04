@@ -161,6 +161,8 @@ static int clk_wzrd_probe(struct platform_device *pdev)
 
 	ret = of_property_read_u32(np, "speed-grade", &clk_wzrd->speed_grade);
 	if (!ret) {
+		clk_wzrd->speed_grade = abs(clk_wzrd->speed_grade);
+
 		if (clk_wzrd->speed_grade < 1 || clk_wzrd->speed_grade > 3) {
 			dev_warn(&pdev->dev, "invalid speed grade '%d'\n",
 				 clk_wzrd->speed_grade);
